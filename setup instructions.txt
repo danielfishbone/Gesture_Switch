@@ -1,19 +1,57 @@
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install python-dev
-sudo apt-get -y install i2c-tools python3-smbus python-smbus
-sudo apt-get install build-essential python-dev
+step 1:
+
+download raspberry Pi imager at https://www.raspberrypi.com/software/
+install it after downloading
+
+Step 2:
+ open imager  >> CHOOSE OS >> select your preferred OS  (i used raspbian buster with desktop environment )
+Step 3:
+plug in your SD card to your pc using the SD card Reader 
+
+click on the CHOOSE STORAGE button and select your Sd card then click on write and wait to complete
+Step 5:
+insert the SC card into your pi and setup your basic profile 
+
+Step 6:
+open your terminal and run the following commands (not the ones in parenthesis) also exclude the dollar sign 
+
+$ raspi-config  (this should open the config console on your raspberry pi)
+
+>> go to interface options  and enable i2c 
+>> you can also confihure your audio device to use HDMI or AUDIO jack
 
 
-sudo apt-get install espeak
-sudo apt-get install espeak python-espeak
-sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel
-sudo python3 -m pip install --force-reinstall adafruit-blinka
-sudo i2cdetect -y 1
+$ sudo apt-get update        (update your apt repo)
+$ sudo apt-get upgrade
+$ sudo apt-get install python3-dev  ( install python )
+$ sudo apt-get install build-essential python-dev
+$ sudo apt-get -y install i2c-tools python3-smbus python-smbus  (install i1c tools)
 
-git clone https://github.com/johnbryanmoore/VL53L0X_rasp_python.git
-cd VL53L0X_rasp_python
 
-make
-sudo python3 gesture.py
+$ sudo apt-get install espeak          (text to speech engine)
+$ sudo apt-get install espeak python-espeak (python binding for text to speech)
+$ sudo python3 -m pip install --force-reinstall adafruit-blinka   (adafruit modules )
+$ sudo i2cdetect -y 1   (this would detect the devices on the i2c bus )
 
+$ git clone https://github.com/danielfishbone/Gesture_Switch.git   (this would get the whole project files into your home directory)
+  
+$ cd Gesture_Switch (go into project directory)
+
+$ make              (compile library using make )
+$ sudo python3 gesture.py (run and test the code )
+
+**so if you've confirmed that everything works good we'll have to configure the pi to auto run the code 
+at startup
+
+$ sudo crontab -e
+
+**tf this is the first time you're running the comand it'll ask you to choose your preferred editor
+choose the number that points to the nano editor
+
+then add the following line (**without quotes )to the end of the file 
+
+"@reboot python3 /home/pi/Gesture_Switch/python/gesture.py"
+
+press ctrl+s to save
+press ctrl+x to exit
+reboot your raspberry pi and test  

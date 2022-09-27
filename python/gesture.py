@@ -11,7 +11,7 @@ tof = VL53L0X.VL53L0X()
 led_blue         = 18
 led_green        = 15
 led_red          = 14
-buzzer = 23
+buzzer = 21
 
 RED   = (True, False, False)
 GREEN = (False, True, False)
