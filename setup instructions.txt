@@ -1,0 +1,19 @@
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python-dev
+sudo apt-get -y install i2c-tools python3-smbus python-smbus
+sudo apt-get install build-essential python-dev
+
+
+sudo apt-get install espeak
+sudo apt-get install espeak python-espeak
+sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel
+sudo python3 -m pip install --force-reinstall adafruit-blinka
+sudo i2cdetect -y 1
+
+git clone https://github.com/johnbryanmoore/VL53L0X_rasp_python.git
+cd VL53L0X_rasp_python
+
+make
+sudo python3 gesture.py
+
